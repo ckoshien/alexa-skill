@@ -40,8 +40,9 @@ router.post('/', function(req, res, next) {
           "status" : "ENABLED"                          // プッシュ通知を送信するかどうか [default = ENABLED]
      }
  }
-  fetch('https://api.amazonalexa.com/v1/alerts/reminders',
-  {method,headers,body})
+ //fetch('https://api.amazonalexa.com/v1/alerts/reminders')
+   fetch('https://api.amazonalexa.com/v1/alerts/reminders',
+   {method,headers})
   .then((response) => {
     return response.json()
   })
