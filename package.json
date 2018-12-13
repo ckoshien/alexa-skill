@@ -11,10 +11,11 @@
   "license": "ISC",
   "dependencies": {
     "ask-sdk": "^2.3.0",
-    "morgan": "^1.9.1",
     "express": "~4.16.0",
+    "googleapis": "^27.0.0",
     "http-errors": "~1.6.2",
-    "nodemon": "^1.18.3",
-    "node-fetch": "^2.3.0"
+    "morgan": "^1.9.1",
+    "node-fetch": "^2.3.0",
+    "nodemon": "^1.18.3"
   }
 }
