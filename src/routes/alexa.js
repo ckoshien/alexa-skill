@@ -22,13 +22,13 @@ const UTTERANCES = {
 app.launch((req, res) => {
   var data = fs.readFileSync('data.json')
   var json = JSON.parse(data)
-  fetch('http://jcbl.mydns.jp/JCBLScore/api/v1/result/season/39')
-  .then((response)=>{
-    if(response.status===200){
-      return response.json()
-    }
-  })
-  .then((json)=>{
+  // fetch('http://jcbl.mydns.jp/JCBLScore/api/v1/result/season/39')
+  // .then((response)=>{
+  //   if(response.status===200){
+  //     return response.json()
+  //   }
+  // })
+  // .then((json)=>{
     var title = json['league']['title']
     var str =''
     str = str + title
@@ -42,7 +42,7 @@ app.launch((req, res) => {
       str = str + "<break time='500ms'/>"
     }
     res.say(str).shouldEndSession(false);
-  })
+  //})
 });
 
 
