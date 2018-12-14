@@ -59,7 +59,7 @@ const fooResponse = (req, res) => {
 }
 const averageResponse = (req, res) => {
   res.say(json['averageTop10'][i-1]['name']+':'+json['averageTop10'][i-1]['average'])
-  .reprompt('続けてください').shouldEndSession(false).
+  .shouldEndSession(false).
   foobarResponse(req, res, 'average');
 }
 const foobarResponse = (req, res, type) => {
