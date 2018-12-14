@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: false }));
 alexa.express({
   expressApp: app,
   endpoint: '/alexa',
-  checkCert: true
+  //checkCert: true
 });
 app.use(express.static(path.join(__dirname, 'build')));
 app.get('/', function(req, res) {
