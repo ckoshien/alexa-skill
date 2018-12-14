@@ -22,8 +22,12 @@ app.launch((req, res) => {
   var data = fs.readFileSync('data.json')
   var json = JSON.parse(data)
   var title = json['league']['title']
+  var str =''
+  str = str + title
+  str = str + 'の'
+  str = str + '打率TOP10を発表します。<break time="1s"/>'
   res.say(
-    title+'の'+'首位打者は'+json['averageTop10'][0]['name']+'で'+json['averageTop10'][0]['average']+'です')
+    str+'首位打者は'+json['averageTop10'][0]['name']+'で'+json['averageTop10'][0]['average']+'です')
     .shouldEndSession(false);
 });
 
