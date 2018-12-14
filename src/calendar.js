@@ -84,14 +84,14 @@ function getAccessToken(oAuth2Client, callback) {
 function listEvents(auth) {
     var file = fs.readFileSync('config.json','utf-8')
     var config = JSON.parse(file)
-    console.log(config.calendarId)
+    //console.log(config.calendarId)
   const calendar = google.calendar({version: 'v3', auth});
-//   calendar.calendarList.list({},(err,res)=>{
-//     const events = res.data.items;
-//     events.map((event,i)=>{
-//         console.log(event)
-//     })
-//   })
+  // calendar.calendarList.list({},(err,res)=>{
+  //   const events = res.data.items;
+  //   events.map((event,i)=>{
+  //       console.log(event)
+  //   })
+  // })
   calendar.events.list({
     //calendarId: 'primary',
     calendarId:config.calendarId,
