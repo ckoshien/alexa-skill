@@ -25,9 +25,9 @@ app.launch((req, res) => {
   var str =''
   str = str + title
   str = str + 'の'
-  str = str + '打率TOP10を発表します。<break time="1s"/>'
+  str = str + '打率TOP10を発表します。<break time="500ms"/>'
   for(var i = 0;i < json['averageTop10'].length ; i++){
-    str = str + i+"位<break time='100ms'/>"
+    str = str + (i+1)+"位<break time='100ms'/>"
     str = str + json['averageTop10'][i]['name']
     str = str + "<break time='100ms'/>"
     str = str + json['averageTop10'][i]['average']
