@@ -1,5 +1,6 @@
 const Alexa = require('alexa-app');
 const app = new Alexa.app('Sample');
+const fs = require('fs')
 
 const UTTERANCES = {
   response: {
@@ -15,6 +16,17 @@ const UTTERANCES = {
     bar: ['ばっばー', 'ばばぁ'],
   },
 };
+
+// 「Alexa〜〜を開いて」と言ってSkillsを起動したときに発動するintent
+app.launch((req, res) => {
+  var data = fs.readFileSync('data.json')
+  var json = JSON.parse(data)
+  var title = json['league']['title']
+  res.say(
+    title+'の'+'首位打者は'+json['averageTop10'][0]['name']+'で'+json['averageTop10'][0]['average']+'です')
+    .shouldEndSession(false);
+});
+
 
 const helpResponse = (req, res) => {
   res.say(UTTERANCES.response.launch).shouldEndSession(false)
@@ -32,10 +44,6 @@ const foobarResponse = (req, res, type) => {
   res.say(UTTERANCES.response[type]).shouldEndSession(true)
 };
 
-// 「Alexa〜〜を開いて」と言ってSkillsを起動したときに発動するintent
-app.launch((req, res) => {
-  res.say(UTTERANCES.response.launch).shouldEndSession(false);
-});
 
 // 下記3つは実装しとかないと審査通らないので注意。↑のlaunchも
 app.intent('AMAZON.StopIntent', { utterances: UTTERANCES.request.stop }, stopAndCancelResponse);
