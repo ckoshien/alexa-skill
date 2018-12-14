@@ -1,6 +1,7 @@
 const Alexa = require('alexa-app');
 const app = new Alexa.app('Sample');
 const fs = require('fs')
+const fetch = require('node-fetch')
 
 const UTTERANCES = {
   response: {
@@ -30,7 +31,7 @@ app.launch((req, res) => {
     str = str + (i+1)+"位<break time='100ms'/>"
     str = str + json['averageTop10'][i]['name']
     str = str + "<break time='100ms'/>"
-    str = str + json['averageTop10'][i]['average']
+    str = str + json['averageTop10'][i]['average'].toFixed(3)
     str = str + "<break time='500ms'/>"
   }
   res.say(str).shouldEndSession(false);
