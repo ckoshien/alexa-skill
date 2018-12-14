@@ -21,16 +21,16 @@ const UTTERANCES = {
 app.launch((req, res) => {
   var data = fs.readFileSync('data.json')
   var json = JSON.parse(data)
-  var url = 'http://jcbl.mydns.jp/JCBLScore/api/v1/result/season/39'
-  fetch(url,{
-    method:'GET'
-  })
-  .then((response)=>{
-    if(response.status===200){
-      return response.json()
-    }
-  })
-  .then((json)=>{
+  // var url = 'http://jcbl.mydns.jp/JCBLScore/api/v1/result/season/39'
+  // fetch(url,{
+  //   method:'GET'
+  // })
+  // .then((response)=>{
+  //   if(response.status===200){
+  //     return response.json()
+  //   }
+  // })
+  //.then((json)=>{
     var title = json['league']['title']
     var str =''
     str = str + title
@@ -44,7 +44,7 @@ app.launch((req, res) => {
       str = str + "<break time='500ms'/>"
     }
     res.say(str).shouldEndSession(false);
-  })
+  //})
 });
 
 
