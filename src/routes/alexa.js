@@ -62,7 +62,8 @@ const barResponse = (req, res) => {
   foobarResponse(req, res, 'bar');
 }
 const foobarResponse = (req, res, type) => {
-  res.say(UTTERANCES.response[type]+req.slots['num']).shouldEndSession(true)
+  res.say(UTTERANCES.response[type]).shouldEndSession(false)
+  res.say(req.slots['num'].value).shouldEndSession(false)
 };
 
 
