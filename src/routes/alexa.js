@@ -5,7 +5,6 @@ const fetch = require('node-fetch')
 
 const UTTERANCES = {
   response: {
-    launch: '「ふっふー」とか「ばっばー」とか言ったらなんか言います。選べ',
     foo: 'ふっふっふー！ テンション上がってきたぁぁ！',
     bar: 'あばばばばばばばばば',
     stopAndCancel: 'あ、すいません。退場します。',
@@ -14,7 +13,7 @@ const UTTERANCES = {
     stop: ['やめて', 'もうええわ', 'バイバイ'],
     help: ['ボスケテ', 'たすけて'],
     foo: ['ふっふー', 'ふー'],
-    bar: ['ばっばー', 'ばばぁ'],
+    average: ['打率'],
   },
 };
 
@@ -58,8 +57,8 @@ const stopAndCancelResponse = (req, res) => {
 const fooResponse = (req, res) => {
   foobarResponse(req, res, 'foo');
 }
-const barResponse = (req, res) => {
-  foobarResponse(req, res, 'bar');
+const averageResponse = (req, res) => {
+  foobarResponse(req, res, 'average');
 }
 const foobarResponse = (req, res, type) => {
   res.say(UTTERANCES.response[type]).shouldEndSession(false)
@@ -75,6 +74,6 @@ app.intent('AMAZON.HelpIntent', { utterances: UTTERANCES.request.help }, helpRes
 // 「ふっふー」と陽気に問いかけると実行されるやつ
 app.intent('foo', { utterances: UTTERANCES.request.foo }, fooResponse);
 // 「ばっばー」と不穏に問いかけると実行されるやつ
-app.intent('bar', { utterances: UTTERANCES.request.bar }, barResponse);
+app.intent('average', { utterances: UTTERANCES.request.average }, averageResponse);
 
 module.exports = app;
