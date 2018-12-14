@@ -22,7 +22,10 @@ const UTTERANCES = {
 app.launch((req, res) => {
   var data = fs.readFileSync('data.json')
   var json = JSON.parse(data)
-  // fetch('http://jcbl.mydns.jp/JCBLScore/api/v1/result/season/39')
+  // var url = 'http://jcbl.mydns.jp/JCBLScore/api/v1/result/season/39'
+  // fetch(url,{
+  //   method:'GET'
+  // })
   // .then((response)=>{
   //   if(response.status===200){
   //     return response.json()
@@ -59,7 +62,7 @@ const barResponse = (req, res) => {
   foobarResponse(req, res, 'bar');
 }
 const foobarResponse = (req, res, type) => {
-  res.say(UTTERANCES.response[type]).shouldEndSession(true)
+  res.say(UTTERANCES.response[type]+req.slots['num']).shouldEndSession(true)
 };
 
 
