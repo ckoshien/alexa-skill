@@ -26,9 +26,14 @@ app.launch((req, res) => {
   str = str + title
   str = str + 'の'
   str = str + '打率TOP10を発表します。<break time="1s"/>'
-  res.say(
-    str+'首位打者は'+json['averageTop10'][0]['name']+'で'+json['averageTop10'][0]['average']+'です')
-    .shouldEndSession(false);
+  for(var i = 0;i < json['averageTop10'].length ; i++){
+    str = str + i+"位<break time='100ms'/>"
+    str = str + json['averageTop10'][i]['name']
+    str = str + "<break time='100ms'/>"
+    str = str + json['averageTop10'][i]['average']
+    str = str + "<break time='500ms'/>"
+  }
+  res.say(str).shouldEndSession(false);
 });
 
 
