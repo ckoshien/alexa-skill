@@ -58,9 +58,11 @@ const fooResponse = (req, res) => {
   foobarResponse(req, res, 'foo');
 }
 const averageResponse = (req, res) => {
+  var data = fs.readFileSync('data.json')
+  var json = JSON.parse(data)
   res.say(json['averageTop10'][i-1]['name']+':'+json['averageTop10'][i-1]['average'])
-  .shouldEndSession(false).
-  foobarResponse(req, res, 'average');
+  .shouldEndSession(false)
+  //foobarResponse(req, res, 'average');
 }
 const foobarResponse = (req, res, type) => {
   res.say(UTTERANCES.response[type]).shouldEndSession(false)
