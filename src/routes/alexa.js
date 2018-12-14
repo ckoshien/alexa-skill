@@ -22,19 +22,27 @@ const UTTERANCES = {
 app.launch((req, res) => {
   var data = fs.readFileSync('data.json')
   var json = JSON.parse(data)
-  var title = json['league']['title']
-  var str =''
-  str = str + title
-  str = str + 'の'
-  str = str + '打率TOP10を発表します。<break time="500ms"/>'
-  for(var i = 0;i < json['averageTop10'].length ; i++){
-    str = str + (i+1)+"位<break time='100ms'/>"
-    str = str + json['averageTop10'][i]['name']
-    str = str + "<break time='100ms'/>"
-    str = str + json['averageTop10'][i]['average'].toFixed(3)
-    str = str + "<break time='500ms'/>"
-  }
-  res.say(str).shouldEndSession(false);
+  fetch('http://jcbl.mydns.jp/JCBLScore/api/v1/result/season/39')
+  .then((response)=>{
+    if(response.status===200){
+      return response.json()
+    }
+  })
+  .then((json)=>{
+    var title = json['league']['title']
+    var str =''
+    str = str + title
+    str = str + 'の'
+    str = str + '打率TOP10を発表します。<break time="500ms"/>'
+    for(var i = 0;i < json['averageTop10'].length ; i++){
+      str = str + (i+1)+"位<break time='100ms'/>"
+      str = str + json['averageTop10'][i]['name']
+      str = str + "<break time='100ms'/>"
+      str = str + json['averageTop10'][i]['average'].toFixed(3)
+      str = str + "<break time='500ms'/>"
+    }
+    res.say(str).shouldEndSession(false);
+  })
 });
 
 
