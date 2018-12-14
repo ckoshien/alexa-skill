@@ -6,14 +6,14 @@ const fetch = require('node-fetch')
 const UTTERANCES = {
   response: {
     foo: 'ふっふっふー！ テンション上がってきたぁぁ！',
-    bar: 'あばばばばばばばばば',
+    average: 'average',
     stopAndCancel: 'あ、すいません。退場します。',
   },
   request: {
     stop: ['やめて', 'もうええわ', 'バイバイ'],
     help: ['ボスケテ', 'たすけて'],
     foo: ['ふっふー', 'ふー'],
-    average: ['打率'],
+    average: ['打率','打率の'],
   },
 };
 
@@ -71,9 +71,7 @@ app.intent('AMAZON.StopIntent', { utterances: UTTERANCES.request.stop }, stopAnd
 app.intent('AMAZON.CancelIntent', { utterances: UTTERANCES.request.stop }, stopAndCancelResponse);
 app.intent('AMAZON.HelpIntent', { utterances: UTTERANCES.request.help }, helpResponse);
 
-// 「ふっふー」と陽気に問いかけると実行されるやつ
 app.intent('foo', { utterances: UTTERANCES.request.foo }, fooResponse);
-// 「ばっばー」と不穏に問いかけると実行されるやつ
 app.intent('average', { utterances: UTTERANCES.request.average }, averageResponse);
 
 module.exports = app;
