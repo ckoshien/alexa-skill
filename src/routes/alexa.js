@@ -61,8 +61,8 @@ const averageResponse = (req, res) => {
   var data = fs.readFileSync('data.json')
   var json = JSON.parse(data)
   var num = req.slots['num'].value
-  res.say(req.slots['num'].value).shouldEndSession(false)
-  res.say(json['averageTop10'][num - 1]['name']+':'+json['averageTop10'][num - 1]['average']).shouldEndSession(false)
+  //res.say(req.slots['num'].value).shouldEndSession(false)
+  res.say(num+"位<break time='100ms'/>"+json['averageTop10'][num - 1]['name']+':'+json['averageTop10'][num - 1]['average']).shouldEndSession(false)
   //foobarResponse(req, res, 'average');
 }
 const foobarResponse = (req, res, type) => {
