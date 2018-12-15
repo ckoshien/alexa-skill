@@ -74,6 +74,24 @@ const eraAllResponse = (req,res) => {
   res.say(str).shouldEndSession(false);
 }
 
+const rbiAllResponse = (req,res) => {
+  var data = fs.readFileSync('data.json')
+  var json = JSON.parse(data)
+  var title = json['league']['title']
+  var str = ''
+  str = str + title
+  str = str + 'の'
+  str = str + '打点TOP10を発表します。<break time="500ms"/>'
+  for (var i = 0; i < json['rbiTop10'].length; i++) {
+    str = str + (i + 1) + "位<break time='100ms'/>"
+    str = str + json['rbiTop10'][i]['name']
+    str = str + "<break time='100ms'/>"
+    str = str + json['rbiTop10'][i]['rbi']
+    str = str + "点<break time='500ms'/>"
+  }
+  res.say(str).shouldEndSession(false);
+}
+
 
 app.intent('AMAZON.StopIntent', { utterances: UTTERANCES.request.stop }, stopAndCancelResponse);
 app.intent('AMAZON.CancelIntent', { utterances: UTTERANCES.request.stop }, stopAndCancelResponse);
@@ -81,6 +99,7 @@ app.intent('AMAZON.HelpIntent', { utterances: UTTERANCES.request.help }, helpRes
 
 app.intent('average', { utterances: UTTERANCES.request.average }, averageResponse);
 app.intent('averageAll', { utterances: UTTERANCES.request.average }, averageAllResponse);
+app.intent('rbiAll', { utterances: UTTERANCES.request.average }, rbiAllResponse);
 app.intent('eraAll', { utterances: UTTERANCES.request.average }, eraAllResponse);
 
 module.exports = app;
