@@ -16,7 +16,7 @@ const UTTERANCES = {
 };
 
 app.launch((req, res) => {
-  res.say('<say-as interpret-as="interjection">ようこそ</say-as>日本カラーボール野球連盟の成績案内へ').shouldEndSession(false);
+  res.say('ようこそ日本カラーボール野球連盟の成績案内へ').shouldEndSession(false);
 });
 
 
@@ -31,7 +31,11 @@ const averageResponse = (req, res) => {
   var data = fs.readFileSync('data.json')
   var json = JSON.parse(data)
   var num = req.slots['num'].value
-  res.say(num+"位<break time='100ms'/>"+json['averageTop10'][num - 1]['name']+':'+json['averageTop10'][num - 1]['average']).shouldEndSession(false)
+  if(num>10){
+    res.say(num+"位<break time='100ms'/>"+json['averageTop10'][num - 1]['name']+':'+json['averageTop10'][num - 1]['average']).shouldEndSession(false)
+  }else{
+    res.say("ごめんなさい。<break time='100ms'/>"+num+"は指定できません。<break time='100ms'/>10以下の順位を指定してください").shouldEndSession(false);
+  }
 }
 
 const averageAllResponse = (req,res) => {
@@ -51,10 +55,24 @@ const averageAllResponse = (req,res) => {
   }
   res.say(str).shouldEndSession(false);
 }
-const foobarResponse = (req, res, type) => {
-  res.say(UTTERANCES.response[type]).shouldEndSession(false)
-  res.say(req.slots['num'].value).shouldEndSession(false)
-};
+
+const eraAllResponse = (req,res) => {
+  var data = fs.readFileSync('data.json')
+  var json = JSON.parse(data)
+  var title = json['league']['title']
+  var str = ''
+  str = str + title
+  str = str + 'の'
+  str = str + '防御率TOP10を発表します。<break time="500ms"/>'
+  for (var i = 0; i < json['eraTop10'].length; i++) {
+    str = str + (i + 1) + "位<break time='100ms'/>"
+    str = str + json['eraTop10'][i]['name']
+    str = str + "<break time='100ms'/>"
+    str = str + json['eraTop10'][i]['era'].toFixed(2)
+    str = str + "<break time='500ms'/>"
+  }
+  res.say(str).shouldEndSession(false);
+}
 
 
 app.intent('AMAZON.StopIntent', { utterances: UTTERANCES.request.stop }, stopAndCancelResponse);
@@ -63,5 +81,6 @@ app.intent('AMAZON.HelpIntent', { utterances: UTTERANCES.request.help }, helpRes
 
 app.intent('average', { utterances: UTTERANCES.request.average }, averageResponse);
 app.intent('averageAll', { utterances: UTTERANCES.request.average }, averageAllResponse);
+app.intent('eraAll', { utterances: UTTERANCES.request.average }, eraAllResponse);
 
 module.exports = app;
