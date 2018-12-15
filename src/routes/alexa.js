@@ -16,7 +16,7 @@ const UTTERANCES = {
 };
 
 app.launch((req, res) => {
-  res.say('日本カラーボール野球連盟の成績案内にようこそ').shouldEndSession(false);
+  res.say('<say-as interpret-as="interjection">ようこそ</say-as>日本カラーボール野球連盟の成績案内へ').shouldEndSession(false);
 });
 
 
