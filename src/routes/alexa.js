@@ -101,6 +101,7 @@ const homerunAllResponse = (req,res) => {
 const readCommonPart=(titleName,titleKey,titleAttr,titleCounter)=>{
   var data = fs.readFileSync('data.json')
   var json = JSON.parse(data)
+  var str = ''
   var seasonTitle = json['league']['title']
   str = str + seasonTitle + 'の'
   str = str + titleName + 'を発表します。<break time="500ms"/>'
