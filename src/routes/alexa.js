@@ -93,23 +93,26 @@ const rbiAllResponse = (req,res) => {
 }
 
 const homerunAllResponse = (req,res) => {
-  var data = fs.readFileSync('data.json')
-  var json = JSON.parse(data)
-  var title = json['league']['title']
   var str = ''
-  str = str + title
-  str = str + 'の'
-  str = str + 'ホームランTOP10を発表します。<break time="500ms"/>'
-  for (var i = 0; i < json['homerunTop10'].length; i++) {
-    str = str + (i + 1) + "位<break time='100ms'/>"
-    str = str + json['homerunTop10'][i]['name']
-    str = str + "<break time='100ms'/>"
-    str = str + json['homerunTop10'][i]['homerun']
-    str = str + "本<break time='500ms'/>"
-  }
+  str = readCommonPart('ホームランTOP10','homerunTop10','homerun','本')
   res.say(str).shouldEndSession(false);
 }
 
+const readCommonPart=(titleName,titleKey,titleAttr,titleCounter)=>{
+  var data = fs.readFileSync('data.json')
+  var json = JSON.parse(data)
+  var seasonTitle = json['league']['title']
+  str = str + seasonTitle + 'の'
+  str = str + titleName + 'を発表します。<break time="500ms"/>'
+  for (var i = 0; i < json[titleKey].length; i++) {
+    str = str + (i + 1) + "位<break time='100ms'/>"
+    str = str + json[titleKey][i]['name']
+    str = str + "<break time='100ms'/>"
+    str = str + json[titleKey][i][titleAttr]
+    str = str + titleCounter+"<break time='500ms'/>"
+  }
+  return str
+}
 
 app.intent('AMAZON.StopIntent', { utterances: UTTERANCES.request.stop }, stopAndCancelResponse);
 app.intent('AMAZON.CancelIntent', { utterances: UTTERANCES.request.stop }, stopAndCancelResponse);
