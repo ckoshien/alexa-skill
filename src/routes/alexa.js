@@ -41,7 +41,7 @@ const averageResponse = (req, res) => {
 const averageAllResponse = (req,res) => {
   var str = ''
   str = readCommonPart(
-    '打率<lang xml:lang="en-EN">TOP10</lang>',
+    '打率TOP<lang xml:lang="en-US">10</lang>',
     'averageTop10',
     'average',
     '')
@@ -51,7 +51,7 @@ const averageAllResponse = (req,res) => {
 const eraAllResponse = (req,res) => {
   var str = ''
   str = readCommonPart(
-    '防御率<lang xml:lang="en-EN">TOP10</lang>',
+    '防御率TOP<lang xml:lang="en-US">10</lang>',
     'eraTop10',
     'era',
     '')
@@ -61,7 +61,7 @@ const eraAllResponse = (req,res) => {
 const rbiAllResponse = (req,res) => {
   var str = ''
   str = readCommonPart(
-    '打点<lang xml:lang="en-EN">TOP10</lang>',
+    '打点TOP<lang xml:lang="en-US">10</lang>',
     'rbiTop10',
     'rbi',
     '打点')
@@ -71,7 +71,7 @@ const rbiAllResponse = (req,res) => {
 const homerunAllResponse = (req,res) => {
   var str = ''
   str = readCommonPart(
-    'ホームラン<lang xml:lang="en-EN">TOP10</lang>',
+    'ホームランTOP<lang xml:lang="en-US">10</lang>',
     'homerunTop10',
     'homerun',
     '本')
