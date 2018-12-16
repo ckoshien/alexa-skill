@@ -44,7 +44,8 @@ const averageAllResponse = (req,res) => {
     '打率TOP<lang xml:lang="en-US">10</lang>',
     'averageTop10',
     'average',
-    '')
+    '',
+    3)
   res.say(str).shouldEndSession(false);
 }
 
@@ -54,7 +55,8 @@ const eraAllResponse = (req,res) => {
     '防御率TOP<lang xml:lang="en-US">10</lang>',
     'eraTop10',
     'era',
-    '')
+    '',
+    2)
   res.say(str).shouldEndSession(false);
 }
 
@@ -64,7 +66,8 @@ const rbiAllResponse = (req,res) => {
     '打点TOP<lang xml:lang="en-US">10</lang>',
     'rbiTop10',
     'rbi',
-    '打点')
+    '打点',
+    0)
   res.say(str).shouldEndSession(false);
 }
 
@@ -74,11 +77,20 @@ const homerunAllResponse = (req,res) => {
     'ホームランTOP<lang xml:lang="en-US">10</lang>',
     'homerunTop10',
     'homerun',
-    '本')
+    '本',
+    0)
   res.say(str).shouldEndSession(false);
 }
 
-const readCommonPart=(titleName,titleKey,titleAttr,titleCounter)=>{
+/**
+ * 共通箇所読み上げメソッド
+ * @param {*} titleName タイトル名
+ * @param {*} titleKey タイトルのキー
+ * @param {*} titleAttr タイトル属性
+ * @param {*} titleCounter 数え方
+ * @param {*} digit 小数点以下桁数
+ */
+const readCommonPart=(titleName,titleKey,titleAttr,titleCounter,digit)=>{
   var data = fs.readFileSync('data.json')
   var json = JSON.parse(data)
   var str = ''
@@ -89,7 +101,7 @@ const readCommonPart=(titleName,titleKey,titleAttr,titleCounter)=>{
     str = str + (i + 1) + "位<break time='100ms'/>"
     str = str + json[titleKey][i]['name']
     str = str + "<break time='100ms'/>"
-    str = str + json[titleKey][i][titleAttr]
+    str = str + json[titleKey][i][titleAttr].toFixed(digit)
     str = str + titleCounter+"<break time='500ms'/>"
   }
   return str
