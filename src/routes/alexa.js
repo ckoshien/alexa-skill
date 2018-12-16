@@ -39,62 +39,42 @@ const averageResponse = (req, res) => {
 }
 
 const averageAllResponse = (req,res) => {
-  var data = fs.readFileSync('data.json')
-  var json = JSON.parse(data)
-  var title = json['league']['title']
   var str = ''
-  str = str + title
-  str = str + 'の'
-  str = str + '打率TOP10を発表します。<break time="500ms"/>'
-  for (var i = 0; i < json['averageTop10'].length; i++) {
-    str = str + (i + 1) + "位<break time='100ms'/>"
-    str = str + json['averageTop10'][i]['name']
-    str = str + "<break time='100ms'/>"
-    str = str + json['averageTop10'][i]['average'].toFixed(3)
-    str = str + "<break time='500ms'/>"
-  }
+  str = readCommonPart(
+    '打率<lang xml:lang="en-EN">TOP10</lang>',
+    'averageTop10',
+    'average',
+    '')
   res.say(str).shouldEndSession(false);
 }
 
 const eraAllResponse = (req,res) => {
-  var data = fs.readFileSync('data.json')
-  var json = JSON.parse(data)
-  var title = json['league']['title']
   var str = ''
-  str = str + title
-  str = str + 'の'
-  str = str + '防御率TOP10を発表します。<break time="500ms"/>'
-  for (var i = 0; i < json['eraTop10'].length; i++) {
-    str = str + (i + 1) + "位<break time='100ms'/>"
-    str = str + json['eraTop10'][i]['name']
-    str = str + "<break time='100ms'/>"
-    str = str + json['eraTop10'][i]['era'].toFixed(2)
-    str = str + "<break time='500ms'/>"
-  }
+  str = readCommonPart(
+    '防御率<lang xml:lang="en-EN">TOP10</lang>',
+    'eraTop10',
+    'era',
+    '')
   res.say(str).shouldEndSession(false);
 }
 
 const rbiAllResponse = (req,res) => {
-  var data = fs.readFileSync('data.json')
-  var json = JSON.parse(data)
-  var title = json['league']['title']
   var str = ''
-  str = str + title
-  str = str + 'の'
-  str = str + '打点TOP10を発表します。<break time="500ms"/>'
-  for (var i = 0; i < json['rbiTop10'].length; i++) {
-    str = str + (i + 1) + "位<break time='100ms'/>"
-    str = str + json['rbiTop10'][i]['name']
-    str = str + "<break time='100ms'/>"
-    str = str + json['rbiTop10'][i]['rbi']
-    str = str + "打点<break time='500ms'/>"
-  }
+  str = readCommonPart(
+    '打点<lang xml:lang="en-EN">TOP10</lang>',
+    'rbiTop10',
+    'rbi',
+    '打点')
   res.say(str).shouldEndSession(false);
 }
 
 const homerunAllResponse = (req,res) => {
   var str = ''
-  str = readCommonPart('ホームランTOP10','homerunTop10','homerun','本')
+  str = readCommonPart(
+    'ホームラン<lang xml:lang="en-EN">TOP10</lang>',
+    'homerunTop10',
+    'homerun',
+    '本')
   res.say(str).shouldEndSession(false);
 }
 
