@@ -10,11 +10,22 @@ const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
 const TOKEN_PATH = 'token.json';
 
 // Load client secrets from a local file.
-fs.readFile('credentials.json', (err, content) => {
-  if (err) return console.log('Error loading client secret file:', err);
-  // Authorize a client with credentials, then call the Google Calendar API.
-  authorize(JSON.parse(content), listEvents);
-});
+// fs.readFile('credentials.json', (err, content) => {
+//   if (err) return console.log('Error loading client secret file:', err);
+// });
+var json={
+  installed:{
+    client_id: process.env.client_id,
+    project_id:'windy-energy-225402',
+    auth_uri: 'https://accounts.google.com/o/oauth2/auth',
+    token_uri: 'https://www.googleapis.com/oauth2/v3/token',
+    auth_provider_x509_cert_url: 'https://www.googleapis.com/oauth2/v1/certs',
+    client_secret: process.env.client_secret,
+    redirect_uris: [ 'urn:ietf:wg:oauth:2.0:oob', 'http://localhost' ]
+  }
+}
+authorize(json, listEvents);
+
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -94,7 +105,7 @@ function listEvents(auth) {
   // })
   calendar.events.list({
     //calendarId: 'primary',
-    calendarId:config.calendarId,
+    calendarId:process.env.calendarId,
     timeMin: (new Date()).toISOString(),
     maxResults: 20,
     singleEvents: true,
