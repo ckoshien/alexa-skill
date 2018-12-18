@@ -13,22 +13,23 @@ const TOKEN_PATH = 'token.json';
 // fs.readFile('credentials.json', (err, content) => {
 //   if (err) return console.log('Error loading client secret file:', err);
 // });
-export function auth(req,res){
-  
-}
-
-var json={
-  installed:{
-    client_id: process.env.client_id,
-    project_id:'windy-energy-225402',
-    auth_uri: 'https://accounts.google.com/o/oauth2/auth',
-    token_uri: 'https://www.googleapis.com/oauth2/v3/token',
-    auth_provider_x509_cert_url: 'https://www.googleapis.com/oauth2/v1/certs',
-    client_secret: process.env.client_secret,
-    redirect_uris: [ 'urn:ietf:wg:oauth:2.0:oob', 'http://localhost' ]
+function calendar(req,res){
+  var json={
+    installed:{
+      client_id: process.env.client_id,
+      project_id:'windy-energy-225402',
+      auth_uri: 'https://accounts.google.com/o/oauth2/auth',
+      token_uri: 'https://www.googleapis.com/oauth2/v3/token',
+      auth_provider_x509_cert_url: 'https://www.googleapis.com/oauth2/v1/certs',
+      client_secret: process.env.client_secret,
+      redirect_uris: [ 'urn:ietf:wg:oauth:2.0:oob', 'http://localhost' ]
+    }
   }
+  authorize(json, listEvents);
 }
-authorize(json, listEvents);
+module.exports = calendar
+
+
 
 
 /**
