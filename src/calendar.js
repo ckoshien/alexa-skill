@@ -93,8 +93,8 @@ function getAccessToken(oAuth2Client, callback) {
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
 function listEvents(auth) {
-    var file = fs.readFileSync('config.json','utf-8')
-    var config = JSON.parse(file)
+    //var file = fs.readFileSync('config.json','utf-8')
+    //var config = JSON.parse(file)
     //console.log(config.calendarId)
   const calendar = google.calendar({version: 'v3', auth});
   // calendar.calendarList.list({},(err,res)=>{
