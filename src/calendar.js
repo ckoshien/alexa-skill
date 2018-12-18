@@ -13,6 +13,10 @@ const TOKEN_PATH = 'token.json';
 // fs.readFile('credentials.json', (err, content) => {
 //   if (err) return console.log('Error loading client secret file:', err);
 // });
+export function auth(req,res){
+  
+}
+
 var json={
   installed:{
     client_id: process.env.client_id,

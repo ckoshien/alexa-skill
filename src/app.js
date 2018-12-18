@@ -1,6 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+var auth = require('../src/calendar')
 //var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
@@ -24,6 +25,7 @@ app.use(logger('dev'));
 //app.use(express.urlencoded({ extended: false }));
 //app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'build')));
+app.post('/calendar',auth)
 app.get('/', function(req, res) {
   //console.log(req.originalUrl)
   res.sendFile(path.join(__dirname,'..', 'build','index.html'));
