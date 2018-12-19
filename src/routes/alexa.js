@@ -16,7 +16,7 @@ const UTTERANCES = {
 };
 
 app.launch((req, res) => {
-  res.say('ようこそ日本カラーボール野球連盟の成績案内へ').shouldEndSession(true);
+  res.say('ようこそ日本カラーボール野球連盟の成績案内へ').shouldEndSession(false);
 });
 
 
@@ -116,5 +116,8 @@ app.intent('averageAll', { utterances: UTTERANCES.request.average }, averageAllR
 app.intent('rbiAll', { utterances: UTTERANCES.request.average }, rbiAllResponse);
 app.intent('homerunAll', { utterances: UTTERANCES.request.average }, homerunAllResponse);
 app.intent('eraAll', { utterances: UTTERANCES.request.average }, eraAllResponse);
+app.sessionEnded( (req,res) => {
+  res.say('またご利用ください。').shouldEndSession(true)
+})
 
 module.exports = app;
