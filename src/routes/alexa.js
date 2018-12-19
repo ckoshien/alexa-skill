@@ -16,12 +16,12 @@ const UTTERANCES = {
 };
 
 app.launch((req, res) => {
-  res.say('ようこそ日本カラーボール野球連盟の成績案内へ').shouldEndSession(false);
+  res.say('ようこそ日本カラーボール野球連盟の成績案内へ').shouldEndSession(true);
 });
 
 
 const helpResponse = (req, res) => {
-  res.say(UTTERANCES.response.launch).shouldEndSession(false)
+  res.say(UTTERANCES.response.launch).shouldEndSession(true)
 };
 const stopAndCancelResponse = (req, res) => {
   res.say(UTTERANCES.response.stopAndCancel)
@@ -32,9 +32,9 @@ const averageResponse = (req, res) => {
   var json = JSON.parse(data)
   var num = req.slots['num'].value
   if(num <= 10){
-    res.say(num+"位<break time='100ms'/>"+json['averageTop10'][num - 1]['name']+':'+json['averageTop10'][num - 1]['average']).shouldEndSession(false)
+    res.say(num+"位<break time='100ms'/>"+json['averageTop10'][num - 1]['name']+':'+json['averageTop10'][num - 1]['average']).shouldEndSession(true)
   }else{
-    res.say("ごめんなさい。<break time='100ms'/>"+num+"は指定できません。<break time='100ms'/>10以下の順位を指定してください").shouldEndSession(false);
+    res.say("ごめんなさい。<break time='100ms'/>"+num+"は指定できません。<break time='100ms'/>10以下の順位を指定してください").shouldEndSession(true);
   }
 }
 
@@ -46,7 +46,7 @@ const averageAllResponse = (req,res) => {
     'average',
     '',
     3)
-  res.say(str).shouldEndSession(false);
+  res.say(str).shouldEndSession(true);
 }
 
 const eraAllResponse = (req,res) => {
@@ -57,7 +57,7 @@ const eraAllResponse = (req,res) => {
     'era',
     '',
     2)
-  res.say(str).shouldEndSession(false);
+  res.say(str).shouldEndSession(true);
 }
 
 const rbiAllResponse = (req,res) => {
@@ -68,7 +68,7 @@ const rbiAllResponse = (req,res) => {
     'rbi',
     '打点',
     0)
-  res.say(str).shouldEndSession(false);
+  res.say(str).shouldEndSession(true);
 }
 
 const homerunAllResponse = (req,res) => {
@@ -79,7 +79,7 @@ const homerunAllResponse = (req,res) => {
     'homerun',
     '本',
     0)
-  res.say(str).shouldEndSession(false);
+  res.say(str).shouldEndSession(true);
 }
 
 /**
