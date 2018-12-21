@@ -64,8 +64,9 @@ const resultResponse = (req, res) => {
     } else {
       res.say('データが用意されていない名前です。')
     }
+  }else{
+    res.say('データが用意されていない名前です。')
   }
-  
   console.log(name)
 }
 
