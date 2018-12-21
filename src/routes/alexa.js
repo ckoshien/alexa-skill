@@ -44,7 +44,7 @@ const resultResponse = (req, res) => {
   var data = fs.readFileSync('data.json')
   var json = JSON.parse(data)
   var name = req.slots['name'].value
-  res.say(name).shouldEndSession(true);
+  res.say(name+'の成績').shouldEndSession(true);
   console.log(name)
 }
 
