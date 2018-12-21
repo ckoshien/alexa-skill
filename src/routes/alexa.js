@@ -44,9 +44,10 @@ const resultResponse = (req, res) => {
   var data = fs.readFileSync('data.json')
   var json = JSON.parse(data)
   var name = req.slots['name'].value
+  var resolutionName = req.slots['name'].resolutions.resolutionsPerAuthority[0].values[0].value.name
   if(name !== undefined){
     for(var i = 0 ; i < json['battingResultList'].length;i++){
-      if(json['battingResultList'][i].name === name){
+      if(json['battingResultList'][i].name === name || json['battingResultList'][i].name === resolutionName){
         res.say(name+'の成績が見つかりました').shouldEndSession(true);
         break;
       }
