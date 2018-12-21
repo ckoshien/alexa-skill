@@ -44,7 +44,17 @@ const resultResponse = (req, res) => {
   var data = fs.readFileSync('data.json')
   var json = JSON.parse(data)
   var name = req.slots['name'].value
-  res.say(name+'の成績').shouldEndSession(true);
+  if(name !== undefined){
+    for(var i = 0 ; i < json['battingResultList'].length;i++){
+      if(json['battingResultList'][i].name === name){
+        res.say(name+'の成績が見つかりました').shouldEndSession(true);
+        break;
+      }
+    }
+    res.say('データが見つかりませんでした')
+  }else{
+    res.say('データが用意されていない名前です。')
+  }
   console.log(name)
 }
 
