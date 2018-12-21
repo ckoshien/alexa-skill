@@ -40,6 +40,14 @@ const averageResponse = (req, res) => {
   }
 }
 
+const resultResponse = (req, res) => {
+  var data = fs.readFileSync('data.json')
+  var json = JSON.parse(data)
+  var name = req.slots['name'].value
+  res.say(name).shouldEndSession(true);
+  console.log(name)
+}
+
 const averageAllResponse = (req,res) => {
   var str = ''
   str = readCommonPart(
@@ -113,6 +121,7 @@ app.intent('AMAZON.StopIntent', { utterances: UTTERANCES.request.stop }, stopAnd
 app.intent('AMAZON.CancelIntent', { utterances: UTTERANCES.request.stop }, stopAndCancelResponse);
 app.intent('AMAZON.HelpIntent', { utterances: UTTERANCES.request.help }, helpResponse);
 
+app.intent('result', { utterances: UTTERANCES.request.average }, resultResponse);
 app.intent('average', { utterances: UTTERANCES.request.average }, averageResponse);
 app.intent('averageAll', { utterances: UTTERANCES.request.average }, averageAllResponse);
 app.intent('rbiAll', { utterances: UTTERANCES.request.average }, rbiAllResponse);
