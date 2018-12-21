@@ -45,7 +45,8 @@ const resultResponse = (req, res) => {
   var json = JSON.parse(data)
   var name = req.slots['name'].value
   var num;
-  if (req.slots['name'].resolutions[0]['values'] !== undefined) {
+  //カスタムスロットが1件以上一致している場合
+  if (req.slots['name'].resolutions[0]['values'].length > 0) {
     var resolutionName = req.slots['name'].resolutions[0]['values'][0]['name']
     if (name !== undefined) {
       for (var i = 0; i < json['battingResultList'].length; i++) {
