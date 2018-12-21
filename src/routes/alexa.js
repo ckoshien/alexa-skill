@@ -45,24 +45,27 @@ const resultResponse = (req, res) => {
   var json = JSON.parse(data)
   var name = req.slots['name'].value
   var num;
-  var resolutionName = req.slots['name'].resolutions[0]['values'][0]['name']
-  if(name !== undefined){
-    for(var i = 0 ; i < json['battingResultList'].length;i++){
-      if(json['battingResultList'][i].name === name || json['battingResultList'][i].name === resolutionName){
-        num = i
-        break;
+  if (req.slots['name'].resolutions[0]['values'] !== undefined) {
+    var resolutionName = req.slots['name'].resolutions[0]['values'][0]['name']
+    if (name !== undefined) {
+      for (var i = 0; i < json['battingResultList'].length; i++) {
+        if (json['battingResultList'][i].name === name || json['battingResultList'][i].name === resolutionName) {
+          num = i
+          break;
+        }
       }
+      if (num !== undefined) {
+        res.say(name + 'の成績は')
+        res.say('打率' + json['battingResultList'][num].average)
+          .shouldEndSession(true);
+      } else {
+        res.say(name + 'の成績は見つかりませんでした').shouldEndSession(true);
+      }
+    } else {
+      res.say('データが用意されていない名前です。')
     }
-    if(num !== undefined){
-      res.say(name+'の成績は')
-      res.say('打率'+json['battingResultList'][num].average)
-      .shouldEndSession(true);
-    }else{
-      res.say(name+'の成績は見つかりませんでした').shouldEndSession(true);
-    }
-  }else{
-    res.say('データが用意されていない名前です。')
   }
+  
   console.log(name)
 }
 
