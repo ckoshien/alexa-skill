@@ -33,6 +33,7 @@ const averageResponse = (req, res) => {
   (async()=>{
     var response = await fetch('https://jcbl.mydns.jp/api/v2/result/season/41')
     var json = await response.json()
+    console.log(json)
     //var json = JSON.parse(data)
     var num = req.slots['num'].value
     if(num <= 10){
