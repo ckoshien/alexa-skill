@@ -30,22 +30,27 @@ const stopAndCancelResponse = (req, res) => {
 };
 
 const averageResponse = (req, res) => {
-  (async()=>{
-    var num = req.slots['num'].value
-    var response = await fetch('https://jcbl.mydns.jp/api/v2/result/season/41')
-    var json = await response.json()
-    console.log(num)
+  var num = req.slots['num'].value
+  console.log(num)
+  fetch('https://jcbl.mydns.jp/api/v2/result/season/41')
+  .then((response)=>{
+    if(response.status === 200){
+      return response.json()
+    }
+  })
+  .then((json)=>{
     console.log(json['averageTop10'][num - 1])
     //var json = JSON.parse(data)
     if(num <= 10){
       res.say(num+"位<break time='100ms'/>"+json['averageTop10'][num - 1]['name']+':'+json['averageTop10'][num - 1]['average']).shouldEndSession(true)
     }else{
       res.say("ごめんなさい。<break time='100ms'/>"+num+"は指定できません。<break time='100ms'/>10以下の順位を指定してください").shouldEndSession(false);
-    }
-  })()
+    }  
+  })
   .catch((err)=>{
     console.error(err);
   })
+
   
   //var data = fs.readFileSync('data.json')
   
