@@ -25,7 +25,7 @@ app.use(logger('dev'));
 //app.use(express.urlencoded({ extended: false }));
 //app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'build')));
-app.post('/calendar',calendar)
+//app.post('/calendar',calendar)
 app.get('/', function(req, res) {
   //console.log(req.originalUrl)
   res.sendFile(path.join(__dirname,'..', 'build','index.html'));
