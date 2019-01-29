@@ -40,6 +40,7 @@ const averageResponse = (req, res) => {
   })
   .then((json)=>{
     console.log(json['averageTop10'][num - 1])
+    console.log(res)
     //var json = JSON.parse(data)
     if(num <= 10){
       res.say(num+"位<break time='100ms'/>"+json['averageTop10'][num - 1]['name']+':'+json['averageTop10'][num - 1]['average']).shouldEndSession(true)
