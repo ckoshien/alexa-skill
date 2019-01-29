@@ -45,6 +45,7 @@ const averageResponse = (req, res) => {
     if(num <= 10){
       //res.say(num+"位<break time='100ms'/")
       //res.say(json['averageTop10'][num - 1]['name'])
+      console.log(json['averageTop10'][num - 1]['average'])
       res.say(json['averageTop10'][num - 1]['average']).shouldEndSession(true)
     }else{
       res.say("ごめんなさい。<break time='100ms'/>"+num+"は指定できません。<break time='100ms'/>10以下の順位を指定してください").shouldEndSession(false);
