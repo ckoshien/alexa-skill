@@ -31,11 +31,12 @@ const stopAndCancelResponse = (req, res) => {
 
 const averageResponse = (req, res) => {
   (async()=>{
+    var num = req.slots['num'].value
     var response = await fetch('https://jcbl.mydns.jp/api/v2/result/season/41')
     var json = await response.json()
-    console.log(json)
+    console.log(num)
+    console.log(json['averageTop10'][num - 1])
     //var json = JSON.parse(data)
-    var num = req.slots['num'].value
     if(num <= 10){
       res.say(num+"位<break time='100ms'/>"+json['averageTop10'][num - 1]['name']+':'+json['averageTop10'][num - 1]['average']).shouldEndSession(true)
     }else{
