@@ -32,7 +32,11 @@ const stopAndCancelResponse = (req, res) => {
 const averageResponse = (req, res) => {
   var num = req.slots['num'].value
   console.log(num)
-  fetch('https://jcbl.mydns.jp/api/v2/result/season/41')
+  fetch('https://jcbl.mydns.jp/api/v2/result/season/41',
+    {
+      method:'GET',
+      headers: { 'Content-Type': 'application/json' }
+    })
   .then((response)=>{
     if(response.status === 200){
       return response.json()
