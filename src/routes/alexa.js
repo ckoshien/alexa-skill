@@ -39,6 +39,7 @@ const averageResponse = (req, res) => {
     })
   .then((response)=>{
     if(response.status === 200){
+      console.log(response.headers.get('content-type'));
       return response.json()
     }
   })
