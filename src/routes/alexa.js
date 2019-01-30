@@ -55,9 +55,7 @@ const averageResponse = (req, res) => {
         console.log(num)
         console.log(''+json.averageTop10[num - 1].average)
         console.log(json.averageTop10[num - 1].average)
-        return new Promise((resolve,reject)=>{
-          resolve(res.say("a"))
-        })
+        return res.say("a").send()
         //res.say(""+json.averageTop10[num - 1].average).shouldEndSession(true)
       }else{
         res.say("ごめんなさい。<break time='100ms'/>"+num+"は指定できません。<break time='100ms'/>10以下の順位を指定してください").shouldEndSession(false);
