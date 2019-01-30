@@ -40,7 +40,7 @@ const averageResponse = (req, res) => {
   .then((response)=>{
     //if(response.status === 200){
       console.log(response.headers.get('content-type'));
-      res.say(response.json().averageTop10[num - 1].average).send()
+      return res.say(response.json().averageTop10[num - 1].toString())
       //return response.json()
     //}
   })
