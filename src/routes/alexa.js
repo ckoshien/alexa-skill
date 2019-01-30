@@ -40,7 +40,7 @@ const averageResponse = (req, res) => {
   .then((response)=>{
     //if(response.status === 200){
       console.log(response.headers.get('content-type'));
-      return res.say(response.json().averageTop10)
+      return response.json()
       //return response.json()
     //}
   })
@@ -55,7 +55,9 @@ const averageResponse = (req, res) => {
         console.log(num)
         console.log(''+json.averageTop10[num - 1].average)
         console.log(json.averageTop10[num - 1].average)
-        res.say("a")
+        return new Promise((resolve,reject)=>{
+          resolve(res.say("a"))
+        })
         //res.say(""+json.averageTop10[num - 1].average).shouldEndSession(true)
       }else{
         res.say("ごめんなさい。<break time='100ms'/>"+num+"は指定できません。<break time='100ms'/>10以下の順位を指定してください").shouldEndSession(false);
