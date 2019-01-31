@@ -30,48 +30,47 @@ const stopAndCancelResponse = (req, res) => {
 };
 
 const averageResponse = (req, res) => {
-  var num = req.slots['num'].value
-  console.log(num)
-  fetch('https://jcbl.mydns.jp/api/v2/result/season/41',
-    {
-      method:'GET',
-      headers: { 'Content-Type': 'application/json' }
-    })
-  .then((response)=>{
-    //if(response.status === 200){
-      console.log(response.headers.get('content-type'));
-      return response.json()
-      //return response.json()
-    //}
-  })
-  .then((json)=>{
-    console.log(json['averageTop10'][num - 1])
-    //console.log(res)
-    //var json = JSON.parse(data)
-    try {
-      if(num <= 10){
-        //res.say(num+"位<break time='100ms'/")
-        //res.say(json['averageTop10'][num - 1]['name'])
-        console.log(num)
-        console.log(''+json.averageTop10[num - 1].average)
-        console.log(json.averageTop10[num - 1].average)
-        return res.say("a").send()
-        //res.say(""+json.averageTop10[num - 1].average).shouldEndSession(true)
-      }else{
-        res.say("ごめんなさい。<break time='100ms'/>"+num+"は指定できません。<break time='100ms'/>10以下の順位を指定してください").shouldEndSession(false);
-      }  
-        
-    } catch (error) {
-      console.error(error)      
-    }
-  })
-  .catch((err)=>{
-    console.error(err);
+  return new Promise((resolve, reject) => {
+    var num = req.slots['num'].value
+    console.log(num)
+    fetch('https://jcbl.mydns.jp/api/v2/result/season/41',
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+      })
+      .then((response) => {
+        //if(response.status === 200){
+        console.log(response.headers.get('content-type'));
+        return response.json()
+        //return response.json()
+        //}
+      })
+      .then((json) => {
+        console.log(json['averageTop10'][num - 1])
+        //console.log(res)
+        //var json = JSON.parse(data)
+          if (num <= 10) {
+            //res.say(num+"位<break time='100ms'/")
+            //res.say(json['averageTop10'][num - 1]['name'])
+            console.log(num)
+            console.log('' + json.averageTop10[num - 1].average)
+            console.log(json.averageTop10[num - 1].average)
+            return res.say("a").send()
+            //res.say(""+json.averageTop10[num - 1].average).shouldEndSession(true)
+          } else {
+            res.say("ごめんなさい。<break time='100ms'/>" + num + "は指定できません。<break time='100ms'/>10以下の順位を指定してください").shouldEndSession(false);
+          }
+
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+
+
   })
 
-  
   //var data = fs.readFileSync('data.json')
-  
+
 }
 
 const resultResponse = (req, res) => {
